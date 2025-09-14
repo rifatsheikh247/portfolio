@@ -227,3 +227,97 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+ // Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyCJ7RfFDLP8kjFIsIT6Kv9pw1ZFe3uH4e0",
+  authDomain: "portfolio-visitor-2666e.firebaseapp.com",
+  projectId: "portfolio-visitor-2666e",
+  storageBucket: "portfolio-visitor-2666e.appspot.com",
+  messagingSenderId: "1021711782169",
+  appId: "1:1021711782169:web:a0223b93ba4f6cdf81f588",
+  measurementId: "G-XGMB7Q9JWQ"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// DOM elements
+const popup = document.getElementById('visitor-popup');
+const popupText = document.getElementById('popup-text');
+const nameInput = document.getElementById('visitor-name');
+const submitBtn = document.getElementById('submit-name');
+
+// Typing effect function
+function typeText(element, text, delay=50) {
+  element.textContent = '';
+  let i = 0;
+  const timer = setInterval(() => {
+    element.textContent += text.charAt(i);
+    i++;
+    if (i >= text.length) clearInterval(timer);
+  }, delay);
+}
+
+// Show popup function
+function showPopup(message) {
+  typeText(popupText, message);
+  popup.classList.add('show');
+}
+
+// Hide popup
+function hidePopup() {
+  popup.classList.remove('show');
+}
+
+// Check if visitor exists
+let visitorName = localStorage.getItem('visitorName');
+if(visitorName) {
+  popupText.textContent = `${visitorName} আপনাকে আবারো স্বাগতম!👋`;
+  nameInput.style.display = 'none';
+  submitBtn.style.display = 'none';
+  popup.classList.add('show');
+  setTimeout(hidePopup, 3000);
+} else {
+  showPopup('আপনি মনে হচ্ছে প্রথমবার আসলেন! আপনার নাম কি জানতে পারি??');
+}
+
+// Enable Enter button when input >=4 letters
+nameInput.addEventListener('input', () => {
+  const value = nameInput.value.trim();
+  if(value.length >= 4) {
+    submitBtn.classList.add('enabled');
+  } else {
+    submitBtn.classList.remove('enabled');
+  }
+});
+
+// Submit name
+submitBtn.addEventListener('click', () => saveName());
+nameInput.addEventListener('keypress', (e) => {
+  if(e.key === 'Enter') saveName();
+});
+
+ function saveName() {
+  const name = nameInput.value.trim();
+  if(name.length < 4) return; // ignore if less than 4 letters
+
+  // Save to localStorage
+  localStorage.setItem('visitorName', name);
+
+  // Save to Firestore
+  db.collection('visitors').add({ name: name, timestamp: Date.now() })
+    .then(() => console.log('Visitor saved to Firestore'))
+    .catch((err) => console.error('Firestore error: ', err));
+
+  // Hide input & button
+  nameInput.style.display = 'none';
+  submitBtn.style.display = 'none';
+
+  // Show welcome message immediately
+  popupText.textContent = `${name}, আপনাকে স্বাগতম! 👋`;
+  popup.classList.add('show');
+
+  // Auto hide after 3 seconds
+  setTimeout(hidePopup, 3000);
+}

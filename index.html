@@ -16,6 +16,11 @@
 
   gtag('config', 'G-8Z4D52CF32');
 </script>
+   <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -90,6 +95,18 @@
         <p>I'm <span class="typed" data-typed-items="  Developer, Cybersecurity Enthusiast, Freelancer,">Designer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
       </div>
 
+      <!-- Fullscreen Popup -->
+   <!-- Popup -->
+  <div id="visitor-popup" class="popup">
+    <div class="popup-content">
+      <p id="popup-text"></p>
+      <input type="text" id="visitor-name" placeholder="আপনার নাম লিখুন..." />
+      <button id="submit-name">Enter</button>
+    </div>
+  </div>
+
+
+ </div>
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
@@ -546,7 +563,7 @@
                   <p>2.0rifatsheikh@gmail.com</p>
                 </div>
               </div><!-- End Info Item -->
-<h4>Current Location</h4>
+               <h4>Current Location</h4>
             <iframe src=" https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d2216.9973453876332!2d90.41808782996513!3d23.81521773065118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e1!4m0!4m5!1s0x3755c70023f35d59%3A0x34103a5efb7d335!2z4Kac4KeL4Kav4Ka84Ka-4KawIOCmuOCmvuCmueCmvuCmsOCmviDgpqzgpr7gppzgpr7gprAsIDYwIEpvd2FyIFNoYWhhcmEgQmF6YXIgUm9hZCwg4Kai4Ka-4KaV4Ka-IDEyMjk!3m2!1d23.8152807!2d90.4163525!5e0!3m2!1sbn!2sbd!4v1757111974487!5m2!1sbn!2sbd" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
@@ -625,7 +642,23 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
+   <!-- Name Input Popup -->
+  <div id="namePopup" class="popup-overlay">
+    <div class="popup-box">
+      <div id="typing" class="typing-text"></div>
+      <input type="text" id="nameInput" placeholder="আপনার নাম লিখুন">
+      <button id="enterBtn">Enter</button>
+    </div>
+  </div>
+
+  <!-- Welcome Back Popup -->
+  <div id="welcomePopup" class="popup-overlay">
+    <div class="popup-box" id="welcomeBox">
+      <div id="welcomeMsg"></div>
+    </div>
+   </div>
   <!-- Main JS File -->
+  
   <script src="assets/js/main.js"></script>
 
 </body>
