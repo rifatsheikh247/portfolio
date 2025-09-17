@@ -573,7 +573,6 @@
            <div class="col-lg-7">
             
              <form name="contact" method="POST" action="#" data-netlify="true" netlify-honeypot="bot-field" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-  <!-- Netlify hidden fields -->
   <input type="hidden" name="form-name" value="contact">
   <input type="hidden" name="bot-field">
 
@@ -600,7 +599,9 @@
     </div>
 
     <div class="col-md-12 text-center">
-      <div class="loading" style="display:none;">Loading...</div>
+      <div class="loading" style="display:none;">
+        <div class="spinner"></div> Sending...
+      </div>
       <div class="error-message" style="display:none;color:red;background:none;"></div>
       <div class="sent-message" style="display:none;color:green;background:none;">
         <span class="tick">✔️</span> Your message has been sent. Thank you!
@@ -654,12 +655,11 @@
   <!-- Main JS File -->
   
   <script src="assets/js/main.js"></script>
-   
-      <script>
+   <script>
 const form = document.querySelector('form[name="contact"]');
 
 form.addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevent default page reload
+  e.preventDefault();
 
   const loading = form.querySelector('.loading');
   const error = form.querySelector('.error-message');
@@ -679,7 +679,7 @@ form.addEventListener('submit', function(e) {
     loading.style.display = 'none';
     sent.style.opacity = 1;
     sent.style.display = 'block';
-    form.reset(); // clear form
+    form.reset();
 
     // Fade out after 3 seconds
     setTimeout(() => {
@@ -701,7 +701,7 @@ form.addEventListener('submit', function(e) {
     error.style.display = 'block';
     error.innerText = "Oops! Something went wrong.";
 
-    // Fade out error after 3 seconds
+    
     setTimeout(() => {
       let opacity = 1;
       const fadeEffect = setInterval(() => {
@@ -716,8 +716,7 @@ form.addEventListener('submit', function(e) {
   });
 });
 </script>
-
-
+        
 </body>
 
 </html>
