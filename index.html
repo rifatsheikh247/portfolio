@@ -570,7 +570,7 @@
 
           <div class="col-lg-7">
             
-            <form name="contact" method="POST" data-netlify="true" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+          <form name="contact" method="POST" data-netlify="true" class="php-email-form" data-aos="fade-up" data-aos-delay="200" onsubmit="return handleSubmit(event)">
   <!-- Netlify hidden field -->
   <input type="hidden" name="form-name" value="contact">
 
@@ -644,6 +644,28 @@
   <!-- Main JS File -->
   
   <script src="assets/js/main.js"></script>
+  <!-- Success message + reload script -->
+<script>
+  function handleSubmit(e) {
+    e.preventDefault(); // form কে থামাও
+
+    // Netlify-তে ডাটা পাঠাও
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(e.target)).toString()
+    })
+    .then(() => {
+      alert("✅ Thank you! Your message has been sent.");
+      setTimeout(() => {
+        window.location.reload(); // 1.5 সেকেন্ড পরে refresh
+      }, 1500);
+    })
+    .catch((error) => alert("❌ Something went wrong: " + error));
+
+    return false; // prevent default submit
+  }
+</script>
 
 </body>
 
