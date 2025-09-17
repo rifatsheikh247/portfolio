@@ -572,7 +572,8 @@
 
            <div class="col-lg-7">
             
-             <form name="contact" method="POST" action="#" data-netlify="true" netlify-honeypot="bot-field" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <form name="contact" method="POST" action="#" data-netlify="true" netlify-honeypot="bot-field" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+  <!-- Netlify hidden fields -->
   <input type="hidden" name="form-name" value="contact">
   <input type="hidden" name="bot-field">
 
@@ -655,12 +656,11 @@
   <!-- Main JS File -->
   
   <script src="assets/js/main.js"></script>
-   <script>
-const form = document.querySelector('form[name="contact"]');
+    <script>
+           const form = document.querySelector('form[name="contact"]');
 
 form.addEventListener('submit', function(e) {
-  e.preventDefault();
-
+  e.preventDefault(); // Prevent page reload
   const loading = form.querySelector('.loading');
   const error = form.querySelector('.error-message');
   const sent = form.querySelector('.sent-message');
@@ -699,9 +699,8 @@ form.addEventListener('submit', function(e) {
     loading.style.display = 'none';
     error.style.opacity = 1;
     error.style.display = 'block';
-    error.innerText = "Oops! Something went wrong.";
+    error.innerText = "✖ Oops! Something went wrong.";
 
-    
     setTimeout(() => {
       let opacity = 1;
       const fadeEffect = setInterval(() => {
@@ -715,7 +714,12 @@ form.addEventListener('submit', function(e) {
     }, 3000);
   });
 });
-</script>
+
+
+
+    </script>
+    
+       
         
 </body>
 

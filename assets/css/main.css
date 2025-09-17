@@ -1428,7 +1428,6 @@ section,
   opacity: 0;
   pointer-events: none;
 }
-<style>
 /* Spinner */
 .spinner {
   border: 3px solid rgba(0,0,0,0.1);
@@ -1442,8 +1441,8 @@ section,
   margin-right: 8px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+@keyframes spin { 
+  to { transform: rotate(360deg); } 
 }
 
 /* Tick animation */
@@ -1457,4 +1456,13 @@ section,
   50% { transform: scale(1.2); opacity:1; }
   100% { transform: scale(1); opacity:1; }
 }
-</style>
+
+/* Optional: button hover */
+button[type="submit"] {
+  cursor: pointer;
+  transition: 0.3s;
+}
+button[type="submit"]:hover {
+  background-color: #4caf50;
+  color: white;
+}
