@@ -572,7 +572,7 @@
 
            <div class="col-lg-7">
             
-            <form name="contact" method="POST" action="#" data-netlify="true" netlify-honeypot="bot-field" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+             <form name="contact" method="POST" action="#" data-netlify="true" netlify-honeypot="bot-field" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
   <!-- Netlify hidden fields -->
   <input type="hidden" name="form-name" value="contact">
   <input type="hidden" name="bot-field">
@@ -599,18 +599,18 @@
       <textarea name="message" id="message-field" rows="10" class="form-control" required></textarea>
     </div>
 
- <div class="col-md-12 text-center">
-  <div class="loading" style="display:none;">Loading</div>
-  <div class="error-message" style="display:none;color:red;background:none;"></div>
-  <div class="sent-message" style="display:none;color:green;background:none;">
-    <span class="tick">✔️</span> Your message has been sent. Thank you!
-  </div>
-  <button type="submit">Send Message</button>
-</div>
-
+    <div class="col-md-12 text-center">
+      <div class="loading" style="display:none;">Loading...</div>
+      <div class="error-message" style="display:none;color:red;background:none;"></div>
+      <div class="sent-message" style="display:none;color:green;background:none;">
+        <span class="tick">✔️</span> Your message has been sent. Thank you!
+      </div>
+      <button type="submit">Send Message</button>
+    </div>
 
   </div>
 </form>
+
 
 
           </div><!-- End Contact Form -->
@@ -655,11 +655,11 @@
   
   <script src="assets/js/main.js"></script>
    
-     <script>
+      <script>
 const form = document.querySelector('form[name="contact"]');
 
 form.addEventListener('submit', function(e) {
-  e.preventDefault(); // prevent page reload
+  e.preventDefault(); // Prevent default page reload
 
   const loading = form.querySelector('.loading');
   const error = form.querySelector('.error-message');
@@ -679,13 +679,13 @@ form.addEventListener('submit', function(e) {
     loading.style.display = 'none';
     sent.style.opacity = 1;
     sent.style.display = 'block';
-    form.reset();
+    form.reset(); // clear form
 
-    // fade out after 3 seconds
+    // Fade out after 3 seconds
     setTimeout(() => {
       let opacity = 1;
       const fadeEffect = setInterval(() => {
-        if (opacity <= 0.05) {
+        if(opacity <= 0.05){
           clearInterval(fadeEffect);
           sent.style.display = 'none';
         }
@@ -701,11 +701,11 @@ form.addEventListener('submit', function(e) {
     error.style.display = 'block';
     error.innerText = "Oops! Something went wrong.";
 
-    // fade out error after 3 seconds
+    // Fade out error after 3 seconds
     setTimeout(() => {
       let opacity = 1;
       const fadeEffect = setInterval(() => {
-        if (opacity <= 0.05) {
+        if(opacity <= 0.05){
           clearInterval(fadeEffect);
           error.style.display = 'none';
         }
