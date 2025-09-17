@@ -570,37 +570,42 @@
 
           <div class="col-lg-7">
             
-           <form name="contact" method="POST" data-netlify="true" class="php-email-form" data-aos="fade-up" data-aos-delay="200" onsubmit="return handleSubmit(event)">
-  <!-- Netlify hidden field -->
-  <input type="hidden" name="form-name" value="contact">
+             <form name="contact" method="POST" data-netlify="true" class="php-email-form"
+          data-aos="fade-up" data-aos-delay="200" onsubmit="return handleSubmit(event)">
+      <!-- Netlify hidden field -->
+      <input type="hidden" name="form-name" value="contact">
 
-  <div class="row gy-4">
-    <div class="col-md-6">
-      <label for="name-field" class="pb-2">Your Name</label>
-      <input type="text" name="name" id="name-field" class="form-control" required>
-    </div>
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <label for="name-field" class="pb-2">Your Name</label>
+          <input type="text" name="name" id="name-field" class="form-control" required>
+        </div>
 
-    <div class="col-md-6">
-      <label for="email-field" class="pb-2">Your Email</label>
-      <input type="email" name="email" id="email-field" class="form-control" required>
-    </div>
+        <div class="col-md-6">
+          <label for="email-field" class="pb-2">Your Email</label>
+          <input type="email" name="email" id="email-field" class="form-control" required>
+        </div>
 
-    <div class="col-md-12">
-      <label for="subject-field" class="pb-2">Subject</label>
-      <input type="text" name="subject" id="subject-field" class="form-control" required>
-    </div>
+        <div class="col-md-12">
+          <label for="subject-field" class="pb-2">Subject</label>
+          <input type="text" name="subject" id="subject-field" class="form-control" required>
+        </div>
 
-    <div class="col-md-12">
-      <label for="message-field" class="pb-2">Message</label>
-      <textarea name="message" id="message-field" rows="10" class="form-control" required></textarea>
-    </div>
+        <div class="col-md-12">
+          <label for="message-field" class="pb-2">Message</label>
+          <textarea name="message" id="message-field" rows="10" class="form-control" required></textarea>
+        </div>
 
-    <div class="col-md-12 text-center">
-      <button type="submit">Send Message</button>
-    </div>
-  </div>
-</form>
+        <div class="col-md-12 text-center">
+          <button type="submit">Send Message</button>
+        </div>
+      </div>
 
+      <!-- Success message placeholder -->
+      <p id="success-message" style="color: green; text-align: center; margin-top: 15px; display: none;">
+        ✅ Your message was sent successfully!
+      </p>
+    </form>
 
           </div><!-- End Contact Form -->
 
@@ -646,24 +651,31 @@
   <script src="assets/js/main.js"></script>
    <!-- Script -->
 <script>
-  function handleSubmit(e) {
-    e.preventDefault(); // default submit বন্ধ
+   function handleSubmit(e) {
+  e.preventDefault();
 
-    const form = e.target;
+  const form = e.target;
+  const successMessage = document.getElementById("success-message");
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(new FormData(form)).toString()
-    })
-    .then(() => {
-      alert("✅ Thank you! Your message has been sent.");
-      form.reset(); // form clear করে দেবে
-    })
-    .catch((error) => alert("❌ Something went wrong: " + error));
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(new FormData(form)).toString()
+  })
+  .then(() => {
+    successMessage.style.display = "block"; // success message দেখাও
+    form.reset(); // form খালি করে দাও
 
-    return false;
-  }
+    // 3 সেকেন্ড পরে message hide করা
+    setTimeout(() => {
+      successMessage.style.display = "none";
+    }, 3000);
+  })
+  .catch((error) => alert("❌ Something went wrong: " + error));
+
+  return false;
+}
+
 </script>
 
 </body>
