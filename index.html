@@ -511,7 +511,9 @@
                   
                   <p>Azaan’s Choice</p>
                   <a href="assets/img/portfolio/books-3.jpg"  data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  
+                   
+
+
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -568,21 +570,48 @@
             </div>
           </div>
 
-          <div class="col-lg-7">
-            
-              <form name="contact" netlify onsubmit="return showMessage()">
-               <input type="text" name="name" required>
-               <input type="email" name="email" required>
-               <button type="submit">Send</button>
-               </form>
-              <p id="success" style="display:none; color:green;">✅ Message sent!</p>
+           <div class="col-lg-7">
+             <form name="contact" method="POST" data-netlify="true" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+  <!-- Netlify hidden input -->
+  <input type="hidden" name="form-name" value="contact">
+
+  <div class="row gy-4">
+
+    <div class="col-md-6">
+      <label for="name-field" class="pb-2">Your Name</label>
+      <input type="text" name="name" id="name-field" class="form-control" required>
+    </div>
+
+    <div class="col-md-6">
+      <label for="email-field" class="pb-2">Your Email</label>
+      <input type="email" name="email" id="email-field" class="form-control" required>
+    </div>
+
+    <div class="col-md-12">
+      <label for="subject-field" class="pb-2">Subject</label>
+      <input type="text" name="subject" id="subject-field" class="form-control" required>
+    </div>
+
+    <div class="col-md-12">
+      <label for="message-field" class="pb-2">Message</label>
+      <textarea name="message" id="message-field" rows="10" class="form-control" required></textarea>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <div class="loading" style="display:none;">Loading</div>
+      <div class="error-message" style="display:none;color:rgb(255, 255, 255);"></div>
+      <div class="sent-message" style="display:none;color:green;">Your message has been sent. Thank you!</div>
+      <button type="submit">Send Message</button>
+    </div>
+
+  </div>
+</form>
 
           </div><!-- End Contact Form -->
 
         </div>
 
       </div>
-
 
     </section><!-- /Contact Section -->
 
@@ -619,13 +648,37 @@
   <!-- Main JS File -->
   
   <script src="assets/js/main.js"></script>
-   <!-- Script -->
-<script>
-function showMessage() {
-  document.getElementById("success").style.display = "block";
-  setTimeout(() => document.getElementById("success").style.display = "none", 3000);
-  return true; // normal submit 
-}
+   
+  <script>
+const form = document.querySelector('form[name="contact"]');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault(); // page refresh prevent
+  const loading = form.querySelector('.loading');
+  const error = form.querySelector('.error-message');
+  const sent = form.querySelector('.sent-message');
+
+  loading.style.display = 'block';
+  error.style.display = 'none';
+  sent.style.display = 'none';
+
+  const formData = new FormData(form);
+
+  fetch("/", {
+    method: "POST",
+    body: formData
+  })
+  .then(() => {
+    loading.style.display = 'none';
+    sent.style.display = 'block';
+    form.reset(); // form clear
+  })
+  .catch(err => {
+    loading.style.display = 'none';
+    error.style.display = 'block';
+    error.innerText = "Oops! Something went wrong.";
+  });
+});
 </script>
 
 </body>
