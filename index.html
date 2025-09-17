@@ -571,7 +571,7 @@
           </div>
 
            <div class="col-lg-7">
-             <form name="contact" method="POST" data-netlify="true" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <form name="contact" method="POST" data-netlify="true" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
   <!-- Netlify hidden input -->
   <input type="hidden" name="form-name" value="contact">
 
@@ -649,11 +649,12 @@
   
   <script src="assets/js/main.js"></script>
    
-  <script>
+   <script>
 const form = document.querySelector('form[name="contact"]');
 
 form.addEventListener('submit', function(e) {
-  e.preventDefault(); // page refresh prevent
+  e.preventDefault(); // prevent page reload
+
   const loading = form.querySelector('.loading');
   const error = form.querySelector('.error-message');
   const sent = form.querySelector('.sent-message');
@@ -673,7 +674,7 @@ form.addEventListener('submit', function(e) {
     sent.style.display = 'block';
     form.reset(); // form clear
   })
-  .catch(err => {
+  .catch(() => {
     loading.style.display = 'none';
     error.style.display = 'block';
     error.innerText = "Oops! Something went wrong.";
