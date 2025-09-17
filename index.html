@@ -599,7 +599,7 @@
 
     <div class="col-md-12 text-center">
       <div class="loading" style="display:none;">Loading</div>
-      <div class="error-message" style="display:none;color:rgb(255, 255, 255);"></div>
+      <div class="error-message" style="display:none;color:red;"></div>
       <div class="sent-message" style="display:none;color:green;">Your message has been sent. Thank you!</div>
       <button type="submit">Send Message</button>
     </div>
@@ -653,7 +653,7 @@
 const form = document.querySelector('form[name="contact"]');
 
 form.addEventListener('submit', function(e) {
-  e.preventDefault(); // prevent page reload
+  e.preventDefault(); // page refresh prevent
 
   const loading = form.querySelector('.loading');
   const error = form.querySelector('.error-message');
