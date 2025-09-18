@@ -571,39 +571,36 @@
           </div>
 
            <div class="col-lg-7">
-            
-         
+            <form id="contact-form" name="contact" method="POST" action="/" data-netlify="true" class="php-email-form">
+  <input type="hidden" name="form-name" value="contact">
 
-      <form id="contact-form" name="contact" method="POST" data-netlify="true" class="php-email-form">
-        <input type="hidden" name="form-name" value="contact">
+  <div class="row gy-4">
+    <div class="col-md-6">
+      <label for="name-field" class="pb-2">Your Name</label>
+      <input type="text" name="name" id="name-field" class="form-control" required>
+    </div>
 
-        <div class="row gy-4">
-          <div class="col-md-6">
-            <label for="name-field" class="pb-2">Your Name</label>
-            <input type="text" name="name" id="name-field" class="form-control" required>
-          </div>
+    <div class="col-md-6">
+      <label for="email-field" class="pb-2">Your Email</label>
+      <input type="email" name="email" id="email-field" class="form-control" required>
+    </div>
 
-          <div class="col-md-6">
-            <label for="email-field" class="pb-2">Your Email</label>
-            <input type="email" name="email" id="email-field" class="form-control" required>
-          </div>
+    <div class="col-md-12">
+      <label for="subject-field" class="pb-2">Subject</label>
+      <input type="text" name="subject" id="subject-field" class="form-control" required>
+    </div>
 
-          <div class="col-md-12">
-            <label for="subject-field" class="pb-2">Subject</label>
-            <input type="text" name="subject" id="subject-field" class="form-control" required>
-          </div>
+    <div class="col-md-12">
+      <label for="message-field" class="pb-2">Message</label>
+      <textarea name="message" id="message-field" rows="10" class="form-control" required></textarea>
+    </div>
 
-          <div class="col-md-12">
-            <label for="message-field" class="pb-2">Message</label>
-            <textarea name="message" id="message-field" rows="10" class="form-control" required></textarea>
-          </div>
-
-          <div class="col-md-12 text-center">
-            <button type="submit">Send Message</button>
-          </div>
-        </div>
-      </form>
-
+    <div class="col-md-12 text-center">
+      <button type="submit">Send Message</button>
+    </div>
+  </div>
+</form>
+ 
       <!-- Message Box -->
       <div id="form-message"></div>
 
@@ -653,66 +650,35 @@
   
   <script src="assets/js/main.js"></script>
     <script>
-           const form = document.querySelector('form[name="contact"]');
+            document.getElementById("contact-form").addEventListener("submit", async function(e) {
+          e.preventDefault(); // Prevent page reload
 
-form.addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevent page reload
-  const loading = form.querySelector('.loading');
-  const error = form.querySelector('.error-message');
-  const sent = form.querySelector('.sent-message');
-
-  loading.style.display = 'block';
-  error.style.display = 'none';
-  sent.style.display = 'none';
-
+  const form = e.target;
   const formData = new FormData(form);
+  const messageBox = document.getElementById("form-message");
 
-  fetch("/", {
-    method: "POST",
-    body: formData
-  })
-  .then(() => {
-    loading.style.display = 'none';
-    sent.style.opacity = 1;
-    sent.style.display = 'block';
+  try {
+    await fetch("/", {
+      method: "POST",
+      body: formData
+    });
+
+    messageBox.textContent = "✅ Your message has been sent!";
+    messageBox.style.color = "green";
+    messageBox.classList.add("show");
+
     form.reset();
 
-    // Fade out after 3 seconds
-    setTimeout(() => {
-      let opacity = 1;
-      const fadeEffect = setInterval(() => {
-        if(opacity <= 0.05){
-          clearInterval(fadeEffect);
-          sent.style.display = 'none';
-        }
-        sent.style.opacity = opacity;
-        opacity -= 0.05;
-      }, 50);
-    }, 3000);
+  } catch (error) {
+    messageBox.textContent = "❌ Something went wrong. Please try again.";
+    messageBox.style.color = "red";
+    messageBox.classList.add("show");
+  }
 
-  })
-  .catch(() => {
-    loading.style.display = 'none';
-    error.style.opacity = 1;
-    error.style.display = 'block';
-    error.innerText = "✖ Oops! Something went wrong.";
-
-    setTimeout(() => {
-      let opacity = 1;
-      const fadeEffect = setInterval(() => {
-        if(opacity <= 0.05){
-          clearInterval(fadeEffect);
-          error.style.display = 'none';
-        }
-        error.style.opacity = opacity;
-        opacity -= 0.05;
-      }, 50);
-    }, 3000);
-  });
-});
-
-
-
+  setTimeout(() => {
+    messageBox.classList.remove("show");
+  }, 3000);
+           });
     </script>
     
        

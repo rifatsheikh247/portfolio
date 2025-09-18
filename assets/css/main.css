@@ -1466,18 +1466,3 @@ button[type="submit"]:hover {
   background-color: #4caf50;
   color: white;
 }
-/* আগের যেসব style আছে, সব থাকবে */
-/* শুধু এই extra অংশটা message এর জন্য */
-
-#form-message {
-  margin-top: 15px;
-  font-size: 15px;
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  text-align: center;
-}
-
-#form-message.show {
-  opacity: 1;
-}
