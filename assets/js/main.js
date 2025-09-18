@@ -321,9 +321,8 @@ nameInput.addEventListener('keypress', (e) => {
   // Auto hide after 3 seconds
   setTimeout(hidePopup, 3000);
 }
-
 document.getElementById("contact-form").addEventListener("submit", async function(e) {
-  e.preventDefault(); // default submit বন্ধ করলাম
+  e.preventDefault();
 
   const form = e.target;
   const formData = new FormData(form);
@@ -335,22 +334,20 @@ document.getElementById("contact-form").addEventListener("submit", async functio
       body: formData
     });
 
-    // Success message
     messageBox.textContent = "✅ Your message has been sent!";
     messageBox.style.color = "green";
     messageBox.classList.add("show");
 
-    form.reset(); // ফর্ম খালি হবে
+    form.reset();
 
   } catch (error) {
-    // Error message
     messageBox.textContent = "❌ Something went wrong. Please try again.";
     messageBox.style.color = "red";
     messageBox.classList.add("show");
   }
 
-  // 3 sec পরে fade হয়ে যাবে
   setTimeout(() => {
     messageBox.classList.remove("show");
   }, 3000);
 });
+
